@@ -1,1 +1,1 @@
-!function(){"use strict";console.log("Popup loaded")}();
+!function(){"use strict";console.log("Popup loaded"),document.addEventListener("DOMContentLoaded",(function(){const e=document.getElementById("startTrackingButton");e&&e.addEventListener("click",(()=>{chrome.runtime.sendMessage({type:"START_TRACKING"})}))}))}();
