@@ -3,11 +3,22 @@ console.log("Popup loaded");
 // TODO: add UI controls
 document.addEventListener("DOMContentLoaded", function () {
   // waits for HTML document to be fully loaded and parsed
+  const chooseVideoSourceBtn = document.getElementById(
+    "chooseVideoSourceButton"
+  );
   const startTrackingBtn = document.getElementById("startTrackingButton");
   const stopTrackingBtn = document.getElementById("stopTrackingButton");
 
   console.log("Start button:", startTrackingBtn);
   console.log("Stop button:", stopTrackingBtn);
+
+  if (chooseVideoSourceBtn) {
+    // ensure that chooseVideoSourceBtn exists before trying to handle a click event
+    chooseVideoSourceBtn.addEventListener("click", () => {
+      console.log("Choose video source button clicked");
+      chrome.runtime.sendMessage({ type: "CHOOSE_VIDEO_SOURCE" });
+    });
+  }
 
   if (startTrackingBtn) {
     // ensure that startTrackingBtn exists before trying to handle a click event
