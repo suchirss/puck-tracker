@@ -1,1 +1,1 @@
-!function(){"use strict";chrome.runtime.onInstalled.addListener((()=>{console.log("Puck Tracker Extension Installed!")}))}();
+!function(){"use strict";chrome.runtime.onInstalled.addListener((()=>{console.log("Puck Tracker Extension Installed!")})),chrome.runtime.onMessage.addListener(((e,n,o)=>{console.log("Message received in background:",e),"START_TRACKING"!==e.type&&"STOP_TRACKING"!==e.type||chrome.tabs.query({active:!0,currentWindow:!0},(n=>{var o;(null===(o=n[0])||void 0===o?void 0:o.id)&&chrome.tabs.sendMessage(n[0].id,e)}))}))}();
