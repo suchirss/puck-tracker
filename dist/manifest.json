@@ -3,12 +3,17 @@
   "description": "Chrome extension to track hockey puck during games",
   "version": "1.0",
   "manifest_version": 3,
-  "permissions": ["scripting", "activeTab", "storage"],
+  "permissions": ["scripting", "activeTab", "storage", "tabs", "background"],
+  "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
-    { "matches": ["<all_urls>"], "js": ["contentScript.js"] }
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js"],
+      "run_at": "document_idle"
+    }
   ],
   "action": {
     "default_popup": "popup.html"

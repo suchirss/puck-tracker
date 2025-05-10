@@ -1,1 +1,1 @@
-!function(){"use strict";console.log("Content script running"),console.log("Tracking puck...")}();
+!function(){"use strict";console.log("Content script running"),chrome.runtime.onMessage.addListener(((n,o,e)=>{console.log("Message received in content script:",n),console.log("From sender:",o),"START_TRACKING"===n.type?(console.log("Starting puck tracking..."),console.log("Tracking puck...")):"STOP_TRACKING"===n.type&&console.log("Stopping puck tracking...")}))}();
