@@ -1,37 +1,41 @@
+import { popupStateManager, PopupState } from "./utils/popupStateManager";
+
 console.log("Popup loaded");
 
 // TODO: add UI controls
 document.addEventListener("DOMContentLoaded", function () {
   // waits for HTML document to be fully loaded and parsed
-  const chooseVideoSourceBtn = document.getElementById(
-    "chooseVideoSourceButton"
+
+  popupStateManager.setState(PopupState.INITIAL); // set initial state
+
+  console.log(
+    "Choose video source button:",
+    popupStateManager.getChooseVideoSourceButton()
   );
-  const startTrackingBtn = document.getElementById("startTrackingButton");
-  const stopTrackingBtn = document.getElementById("stopTrackingButton");
+  console.log("Start button:", popupStateManager.getStartTrackingButton());
+  console.log("Stop button:", popupStateManager.getStopTrackingButton());
 
-  console.log("Choose video source button:", chooseVideoSourceBtn);
-  console.log("Start button:", startTrackingBtn);
-  console.log("Stop button:", stopTrackingBtn);
-
-  if (chooseVideoSourceBtn) {
+  if (popupStateManager.getChooseVideoSourceButton()) {
     // ensure that chooseVideoSourceBtn exists before trying to handle a click event
-    chooseVideoSourceBtn.addEventListener("click", () => {
-      console.log("Choose video source button clicked");
-      chrome.runtime.sendMessage({ type: "CHOOSE_VIDEO_SOURCE" });
-    });
+    popupStateManager
+      .getChooseVideoSourceButton()
+      .addEventListener("click", () => {
+        console.log("Choose video source button clicked");
+        chrome.runtime.sendMessage({ type: "CHOOSE_VIDEO_SOURCE" });
+      });
   }
 
-  if (startTrackingBtn) {
+  if (popupStateManager.getStartTrackingButton()) {
     // ensure that startTrackingBtn exists before trying to handle a click event
-    startTrackingBtn.addEventListener("click", () => {
+    popupStateManager.getStartTrackingButton().addEventListener("click", () => {
       console.log("Start button clicked");
       chrome.runtime.sendMessage({ type: "START_TRACKING" });
     });
   }
 
-  if (stopTrackingBtn) {
+  if (popupStateManager.getStopTrackingButton()) {
     // ensure that stopTrackingBtn exists before trying to handle a click event
-    stopTrackingBtn.addEventListener("click", () => {
+    popupStateManager.getStopTrackingButton().addEventListener("click", () => {
       console.log("Stop button clicked");
       chrome.runtime.sendMessage({ type: "STOP_TRACKING" });
     });
