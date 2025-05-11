@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const startTrackingBtn = document.getElementById("startTrackingButton");
   const stopTrackingBtn = document.getElementById("stopTrackingButton");
 
+  console.log("Choose video source button:", chooseVideoSourceBtn);
   console.log("Start button:", startTrackingBtn);
   console.log("Stop button:", stopTrackingBtn);
 

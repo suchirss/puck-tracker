@@ -1,0 +1,6 @@
+.video-overlay {
+  position: absolute;
+  background-color: rgba(8, 166, 246, 0.65);
+  pointer-events: none;
+  z-index: 1000; /* Ensure it appears above other elements */
+}
