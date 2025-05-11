@@ -11,6 +11,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     chooseVideoSource().then((video) => {
       if (video) {
         console.log("Video source chosen:", video);
+        chrome.runtime.sendMessage({
+          type: "VIDEO_SOURCE_CHOSEN",
+        }); // Notify the popup through the background script that the video source has been chosen (in order to update the popup UI)
       } else {
         console.log("No video source selected.");
       }

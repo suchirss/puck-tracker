@@ -14,7 +14,6 @@ export class PopupStateManager {
   private stopTrackingBtn!: HTMLButtonElement;
 
   constructor() {
-    this.state = PopupState.INITIAL; // set initial state
     this.chooseVideoSourceBtn = document.getElementById(
       "chooseVideoSourceButton"
     ) as HTMLButtonElement;

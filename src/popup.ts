@@ -8,6 +8,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   popupStateManager.setState(PopupState.INITIAL); // set initial state
 
+  // Listen to messages from the background script
+  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    console.log("Message received in popup:", message);
+    console.log("From sender:", sender);
+
+    if (message.type === "VIDEO_SOURCE_CHOSEN") {
+      console.log("Video source chosen in popup");
+      popupStateManager.setState(PopupState.VIDEO_CHOSEN); // set state to VIDEO_CHOSEN
+    }
+  });
+
   console.log(
     "Choose video source button:",
     popupStateManager.getChooseVideoSourceButton()

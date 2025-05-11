@@ -17,6 +17,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         chrome.tabs.sendMessage(tabs[0].id, message);
       }
     });
+  } else if (message.type === "VIDEO_SOURCE_CHOSEN") {
+    console.log("Video source chosen in background script");
+    chrome.runtime.sendMessage({
+      type: "VIDEO_SOURCE_CHOSEN",
+    });
 
     return true; // keep the message channel open for sendMessage to get delivered to the content script without Chrome closing the message channel too early
   }
