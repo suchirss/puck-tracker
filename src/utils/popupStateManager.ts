@@ -53,6 +53,11 @@ export class PopupStateManager {
     this.state = newState;
     console.log(`Popup state changed to: ${this.state}`);
     this.updateUIOnStateChange();
+
+    // Persist the state in Chrome storage
+    chrome.storage.local.set({ popupState: this.state }, () => {
+      console.log("Popup state saved to storage: ", this.state);
+    });
   }
 
   private updateUIOnStateChange(): void {

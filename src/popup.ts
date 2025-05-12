@@ -6,7 +6,18 @@ console.log("Popup loaded");
 document.addEventListener("DOMContentLoaded", function () {
   // waits for HTML document to be fully loaded and parsed
 
-  popupStateManager.setState(PopupState.INITIAL); // set initial state
+  // popupStateManager.setState(PopupState.INITIAL); // set initial state
+
+  chrome.storage.local.get("popupState", (result) => {
+    const savedState = result.popupState as PopupState;
+    if (savedState) {
+      console.log("Restoring saved state from storage: ", savedState);
+      popupStateManager.setState(savedState); // restore state from storage
+    } else {
+      console.log("No saved state found in storage, using initial state.");
+      popupStateManager.setState(PopupState.INITIAL); // set initial state
+    }
+  });
 
   // Listen to messages from the background script
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
