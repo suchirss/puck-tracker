@@ -10,3 +10,7 @@ yarn-error.log*
 .env
 
 .vscode/
+
+.ml_training/
+
+public/opencv.js
