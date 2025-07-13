@@ -6,8 +6,6 @@ console.log("Popup loaded");
 document.addEventListener("DOMContentLoaded", function () {
   // waits for HTML document to be fully loaded and parsed
 
-  // popupStateManager.setState(PopupState.INITIAL); // set initial state
-
   chrome.storage.local.get("popupState", (result) => {
     const savedState = result.popupState as PopupState;
     if (savedState) {

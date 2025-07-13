@@ -6,6 +6,7 @@ import { trackPuck } from "./utils/puckTracker";
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   console.log("Message received in content script:", message);
   console.log("From sender:", sender);
+
   if (message.type === "CHOOSE_VIDEO_SOURCE") {
     console.log("Choosing video source...");
     chooseVideoSource().then((video) => {
