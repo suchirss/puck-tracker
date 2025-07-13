@@ -21,7 +21,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["wasm/**"],
+      "resources": ["wasm/**", "workerThread.js"],
       "matches": ["<all_urls>"]
     }
   ]

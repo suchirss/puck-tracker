@@ -35,9 +35,15 @@ async function setupVideoAndCanvas(video: HTMLVideoElement) {
 
   const offscreenCanvas = canvasOverlay.transferControlToOffscreen(); // transfer the canvas to an OffscreenCanvas to allow Web Worker processing
 
-  worker = new Worker(chrome.runtime.getURL("workerThread.js"), {
-    type: "module",
-  });
+  // use a Blob URL to load the worker script to avoid issues with dynamic imports in workers
+  const workerUrl = URL.createObjectURL(
+    new Blob([`import "${chrome.runtime.getURL("workerThread.js")}";`], {
+      type: "application/javascript",
+    })
+  );
+
+  worker = new Worker(workerUrl, { type: "module" });
+  // type module because we are using ES6 modules in the worker - allows us to use import/export syntax
 
   worker.postMessage(
     {
