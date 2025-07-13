@@ -3,6 +3,10 @@ console.log("Content script running");
 import { chooseVideoSource } from "./utils/videoSourceSelector";
 import { trackPuck } from "./utils/puckTracker";
 
+let videoElement: HTMLVideoElement;
+let canvasOverlay: HTMLCanvasElement;
+let worker: Worker;
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   console.log("Message received in content script:", message);
   console.log("From sender:", sender);
@@ -12,9 +16,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     chooseVideoSource().then((video) => {
       if (video) {
         console.log("Video source chosen:", video);
+
+        // 1. setup canvas overlay and web worker
+        setupVideoandCanvas(video);
+
+        // 2. notify popup through the background script that the video source has been chosen
         chrome.runtime.sendMessage({
           type: "VIDEO_SOURCE_CHOSEN",
-        }); // Notify the popup through the background script that the video source has been chosen (in order to update the popup UI)
+        });
       } else {
         console.log("No video source selected.");
       }
