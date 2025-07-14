@@ -22,7 +22,7 @@ async function setupVideoAndCanvas(video: HTMLVideoElement) {
   const { videoWidth, videoHeight } = videoElement;
 
   // canvas overlay to show the tracking results
-  const canvasOverlay = document.createElement("canvas");
+  canvasOverlay = document.createElement("canvas");
   canvasOverlay.width = videoWidth;
   canvasOverlay.height = videoHeight;
   canvasOverlay.style.position = "fixed";
@@ -35,11 +35,23 @@ async function setupVideoAndCanvas(video: HTMLVideoElement) {
 
   const offscreenCanvas = canvasOverlay.transferControlToOffscreen(); // transfer the canvas to an OffscreenCanvas to allow Web Worker processing
 
+  // predefine the worker thread URL and the open CV URL
+  const workerThreadURL = chrome.runtime.getURL("workerThread.js");
+  const opencvURL = chrome.runtime.getURL("wasm/opencv.js");
+
   // use a Blob URL to load the worker script to avoid issues with dynamic imports in workers
   const workerUrl = URL.createObjectURL(
-    new Blob([`import "${chrome.runtime.getURL("workerThread.js")}";`], {
-      type: "application/javascript",
-    })
+    new Blob(
+      [
+        `
+        import "${workerThreadURL}";
+        import "${opencvURL}";
+        `,
+      ],
+      {
+        type: "application/javascript",
+      }
+    )
   );
 
   worker = new Worker(workerUrl, { type: "module" });
@@ -71,17 +83,35 @@ function startFrameLoop(
 
   // helper function to push frames to the worker
   const pushFrameToWorker = async () => {
+    // guard against video not being ready
+    if (
+      video.readyState < 2 ||
+      video.videoWidth === 0 ||
+      video.videoHeight === 0
+    ) {
+      // Skip drawing if video isn't ready or resolution is 0
+      requestAnimationFrame(pushFrameToWorker);
+      return;
+    }
+
+    // draw the current video frame to the canvas
     ctx?.drawImage(video, 0, 0, width, height);
-    const bitmap = await createImageBitmap(canvas);
-    worker.postMessage(
-      {
-        type: "FRAME",
-        imageBitMap: bitmap,
-        videoWidth: width,
-        videoHeight: height,
-      },
-      [bitmap] // transfer the bitmap to the worker
-    );
+
+    // convert the canvas to an ImageBitmap and send it to the worker
+    try {
+      const bitmap = await createImageBitmap(canvas);
+      worker.postMessage(
+        {
+          type: "FRAME",
+          imageBitMap: bitmap,
+          videoWidth: width,
+          videoHeight: height,
+        },
+        [bitmap] // transfer the bitmap to the worker
+      );
+    } catch (error) {
+      console.error("Error creating ImageBitmap:", error);
+    }
 
     requestAnimationFrame(pushFrameToWorker); // continue the loop
   };

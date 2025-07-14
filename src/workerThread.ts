@@ -1,19 +1,33 @@
+export {}; // must be a module to redeclare global variables (self, cv, etc.)
+
+// modifying the global self object to include cvReady of type Promise<void>
+declare const self: WorkerGlobalScope &
+  typeof globalThis & {
+    cvReady: Promise<void>;
+  };
+
 declare const cv: any; // Declare OpenCV globally
 // declare tells compiler that cv is a global variable - "dont complain about not finding a definition for cv"
 // This is necessary because OpenCV.js is loaded dynamically and may not be available immediately
 // :any is used to avoid type checking for cv for TypeScript
 
-importScripts(chrome.runtime.getURL("wasm/opencv.js")); // Load OpenCV.js in the worker
-
-cv["onRuntimeInitialized"] = () => {
-  // safe to receive INIT/FRAME messages now
-};
+self.cvReady = new Promise((resolve) => {
+  if (typeof cv !== "undefined" && cv["onRuntimeInitialized"]) {
+    cv["onRuntimeInitialized"] = () => {
+      resolve();
+    };
+  } else {
+    console.error("OpenCV not found. Make sure it's properly imported.");
+  }
+});
 
 let ctx: OffscreenCanvasRenderingContext2D | null = null; // Context for OffscreenCanvas
 let src: any; // stores OpenCV Mat object
 
-self.onmessage = (e) => {
+self.onmessage = async (e) => {
   const { type } = e.data; // destructuring the message data
+
+  await self.cvReady; // wait for OpenCV to be ready
 
   if (type == "INIT") {
     // make sure that canvas is an OffscreenCanvas
