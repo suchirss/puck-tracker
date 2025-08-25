@@ -44,8 +44,8 @@ async function setupVideoAndCanvas(video: HTMLVideoElement) {
     new Blob(
       [
         `
-        import "${workerThreadURL}";
         import "${opencvURL}";
+        import "${workerThreadURL}";
         `,
       ],
       {
