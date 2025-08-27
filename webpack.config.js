@@ -29,6 +29,10 @@ module.exports = {
         loader: "ts-loader",
         exclude: /node_modules/,
       },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
     ],
   },
   plugins: [
@@ -37,6 +41,8 @@ module.exports = {
         { from: "public", to: "." },
         { from: "manifest.json", to: "." },
         { from: "src/styles.css", to: "styles.css" },
+        { from: "src/popup.css", to: "popup.css" },
+        { from: "src/assets", to: "assets" },
       ],
     }),
   ],

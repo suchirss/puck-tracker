@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
+import "./popup.css";
 
 export enum PopupState {
   INITIAL = "INITIAL",
   VIDEO_CHOSEN = "VIDEO_CHOSEN",
   // TODO: add STARTED_TRACKING, STOPPED_TRACKING states
   // and update PopupStateManager to handle these states
-  RESET = "RESET",
 }
 
 function Popup() {
@@ -58,27 +58,37 @@ function Popup() {
 
   return (
     <div className="Popup">
-      <button
-        id="chooseVideoSourceButton"
-        disabled={popupState != PopupState.INITIAL}
-        onClick={handleChooseVideoClick}
-      >
-        Choose Video Source
-      </button>
-      <button
-        id="startTrackingButton"
-        disabled={popupState != PopupState.VIDEO_CHOSEN}
-      >
-        Start Tracking
-      </button>
-      <button id="stopTrackingButton">Stop Tracking</button>
-      <button
-        id="resetButton"
-        disabled={popupState == PopupState.INITIAL}
-        onClick={handleResetClick}
-      >
-        Reset
-      </button>
+      <header id="topHeader">
+        <span>Puck Tracker</span>
+        <img
+          src="./assets/hockey-player-blue.png"
+          alt="Puck Tracker Icon"
+          id="hockeyPlayerIcon"
+        ></img>
+      </header>
+      <div className="buttonContainer">
+        <button
+          id="chooseVideoSourceButton"
+          disabled={popupState != PopupState.INITIAL}
+          onClick={handleChooseVideoClick}
+        >
+          Choose Video Source
+        </button>
+        <button
+          id="startTrackingButton"
+          disabled={popupState != PopupState.VIDEO_CHOSEN}
+        >
+          Start Tracking
+        </button>
+        <button id="stopTrackingButton">Stop Tracking</button>
+        <button
+          id="resetButton"
+          disabled={popupState == PopupState.INITIAL}
+          onClick={handleResetClick}
+        >
+          Reset
+        </button>
+      </div>
     </div>
   );
 }

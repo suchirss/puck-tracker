@@ -16,6 +16,8 @@
     "@types/react": "^19.1.11",
     "@types/react-dom": "^19.1.8",
     "copy-webpack-plugin": "^13.0.0",
+    "css-loader": "^7.1.2",
+    "style-loader": "^4.0.0",
     "ts-loader": "^9.5.2",
     "tsc-watch": "^6.2.1",
     "typescript": "^5.8.3",

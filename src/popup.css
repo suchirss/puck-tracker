@@ -1,0 +1,52 @@
+.Popup {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  background-color: rgb(224, 236, 238);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+button {
+  display: block;
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: rgb(248, 248, 248);
+  border: 2px solid #517ec0;
+  border-radius: 10px;
+  width: 150px;
+  height: 60px;
+}
+
+button:disabled {
+  background-color: rgba(248, 248, 248, 0.562);
+  cursor: not-allowed;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  width: 175px;
+}
+
+#topHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(153, 231, 245);
+  text-align: center;
+  padding: 5px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#hockeyPlayerIcon {
+  width: 24px;
+  height: 24px;
+  margin-left: 10px;
+  background-color: transparent;
+}
