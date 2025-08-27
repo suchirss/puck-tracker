@@ -13,11 +13,17 @@
   "license": "ISC",
   "devDependencies": {
     "@types/chrome": "^0.0.317",
+    "@types/react": "^19.1.11",
+    "@types/react-dom": "^19.1.8",
     "copy-webpack-plugin": "^13.0.0",
     "ts-loader": "^9.5.2",
     "tsc-watch": "^6.2.1",
     "typescript": "^5.8.3",
     "webpack": "^5.99.7",
     "webpack-cli": "^6.0.1"
+  },
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
   }
 }

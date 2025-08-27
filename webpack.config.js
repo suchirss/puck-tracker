@@ -6,7 +6,7 @@ module.exports = {
   entry: {
     background: "./src/background.ts",
     contentScript: "./src/contentScript.ts",
-    popup: "./src/popup.ts",
+    popup: "./src/popup.tsx",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -20,12 +20,12 @@ module.exports = {
   },
   devtool: false,
   resolve: {
-    extensions: [".ts", ".js"],
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
   module: {
     rules: [
       {
-        test: /\.ts$/,
+        test: /\.(ts|tsx)$/,
         loader: "ts-loader",
         exclude: /node_modules/,
       },
