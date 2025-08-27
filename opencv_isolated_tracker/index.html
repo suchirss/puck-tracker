@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Isolated OpenCV Puck Tracker</title>
+  </head>
+  <body>
+    <div id="videoGroup">
+      <h3>Puck Tracker Simulated Environment</h3>
+      <!-- video and canvas placeholders to be modified-->
+      <video id="inputVideo"></video>
+      <button id="playVideoButton">Play Video</button>
+      <canvas id="outputCanvas"></canvas>
+    </div>
+
+    <!-- Load OpenCV.js -->
+    <script
+      async
+      src="https://docs.opencv.org/4.x/opencv.js"
+      onload="onOpenCvReady();"
+      type="text/javascript"
+    ></script>
+    <script src="tracker.js"></script>
+  </body>
+</html>
