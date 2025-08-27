@@ -31,6 +31,8 @@ function Popup() {
     const handleMessage = (message: any) => {
       if (message.type === "VIDEO_SOURCE_CHOSEN") {
         setPopupState(PopupState.VIDEO_CHOSEN);
+      } else if (message.type == "VIDEO_SOURCE_RESET") {
+        setPopupState(PopupState.INITIAL);
       }
       // TODO: handle other message types here:
     };
@@ -45,6 +47,13 @@ function Popup() {
     console.log("Choose video source button clicked");
     // TODO: connect video selection logic
     chrome.runtime.sendMessage({ type: "CHOOSE_VIDEO_SOURCE" }); // tells background script that a video source was chosen
+  };
+
+  const handleResetClick = () => {
+    console.log("Reset button clicked");
+    chrome.runtime.sendMessage({
+      type: "RESET",
+    });
   };
 
   return (
@@ -63,7 +72,11 @@ function Popup() {
         Start Tracking
       </button>
       <button id="stopTrackingButton">Stop Tracking</button>
-      <button id="resetButton" disabled={popupState == PopupState.INITIAL}>
+      <button
+        id="resetButton"
+        disabled={popupState == PopupState.INITIAL}
+        onClick={handleResetClick}
+      >
         Reset
       </button>
     </div>
