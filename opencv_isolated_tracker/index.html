@@ -8,10 +8,13 @@
   <body>
     <div id="videoGroup">
       <h3>Puck Tracker Simulated Environment</h3>
-      <!-- video and canvas placeholders to be modified-->
-      <video id="inputVideo"></video>
+
+      <!-- video and canvas placeholders to be modified in tracker.js-->
+      <div id="videoWrapper">
+        <video id="inputVideo"></video> <canvas id="outputCanvas"></canvas>
+      </div>
+
       <button id="playVideoButton">Play Video</button>
-      <canvas id="outputCanvas"></canvas>
     </div>
 
     <!-- Load OpenCV.js -->

@@ -1,11 +1,3 @@
-#inputVideo {
-  padding: 2px;
-  cursor: pointer;
-  border: 2px solid #000000;
-  width: 640px;
-  height: 360px;
-}
-
 #videoGroup {
   display: flex;
   flex-direction: column;
@@ -15,6 +7,30 @@
   background-color: rgb(217, 255, 255);
   width: 100%;
   height: 100vh;
+}
+
+#videoWrapper {
+  position: relative;
+  width: 640px;
+  height: 360px;
+}
+
+#inputVideo {
+  cursor: pointer;
+  border: 2px solid #000000;
+  width: 640px;
+  height: 360px;
+  box-sizing: border-box;
+}
+
+#outputCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 640px;
+  height: 360px;
+  pointer-events: none;
+  background-color: rgba(170, 188, 179, 0.68);
 }
 
 #playVideoButton {
