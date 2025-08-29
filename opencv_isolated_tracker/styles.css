@@ -33,7 +33,12 @@
   background-color: rgba(170, 188, 179, 0.68);
 }
 
-#playVideoButton {
-  margin-top: 10px;
-  padding: 5px;
+#templateMatchImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 640px;
+  height: 360px;
+  pointer-events: none;
+  background-color: rgba(170, 188, 179, 0.68);
 }

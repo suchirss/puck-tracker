@@ -11,10 +11,10 @@
 
       <!-- video and canvas placeholders to be modified in tracker.js-->
       <div id="videoWrapper">
-        <video id="inputVideo"></video> <canvas id="outputCanvas"></canvas>
+        <video id="inputVideo"></video>
+        <image id="templateMatchImage"></image>
+        <canvas id="outputCanvas"></canvas>
       </div>
-
-      <button id="playVideoButton">Play Video</button>
     </div>
 
     <!-- Load OpenCV.js -->
@@ -24,6 +24,6 @@
       onload="onOpenCvReady();"
       type="text/javascript"
     ></script>
-    <script src="tracker.js"></script>
+    <script type="module" src="tracker.js"></script>
   </body>
 </html>
