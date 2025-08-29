@@ -1,12 +1,14 @@
 function onOpenCvReady() {
-  console.log("OpenCV.js is ready");
+  cv["onRuntimeInitialized"] = () => {
+    console.log("OpenCV.js is truly ready");
 
-  const video = document.getElementById("inputVideo");
-  const src = "./assets/kadri-slow-mo-breakaway-goal.mp4";
+    const video = document.getElementById("inputVideo");
+    const src = "./assets/kadri-slow-mo-breakaway-goal.mp4";
 
-  videoSetup(video, src);
-  pausePlayMutedVideoOnLoop(video);
-  matAndCanvasSetup(video);
+    videoSetup(video, src);
+    pausePlayMutedVideoOnLoop(video);
+    matAndCanvasSetup(video);
+  };
 }
 
 function videoSetup(video, src) {
