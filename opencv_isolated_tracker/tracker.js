@@ -9,10 +9,16 @@ function onOpenCvReady() {
     const imageSrc =
       "./assets/kadri-slow-mo-breakaway-goal-image-early-frame.JPG";
 
+    const needleImageSrc =
+      "./assets/kadri-slow-mo-breakaway-goal-image-early-frame-puck-close-up.JPG";
+    const haystackImageSrc =
+      "./assets/kadri-slow-mo-breakaway-goal-image-early-frame.JPG";
+
     videoSetup(video, videoSrc);
     imageSetup(image, imageSrc);
     pausePlayMutedVideoOnLoop(video);
     matAndCanvasSetup(video);
+    templateMatchingImage(needleImageSrc, haystackImageSrc);
   };
 }
 
@@ -77,4 +83,23 @@ function matAndCanvasSetup(video) {
   });
 }
 
-window.onOpenCvReady = onOpenCvReady;
+function templateMatchingImage(needle, haystack) {
+  /* 
+  TODO: proper template matching in browswer:
+
+  Below template matching code is flawed - <image>s must be created in index.html for both needleImage and HaystackImage, then those <image> elements are passed to the cv.matchTemplate() function
+  
+  Further, the result also needs to be passed to a <result> to be able to see it in browser
+
+  For now, will test template matching in Python first. Then implement in browser openCV if it makes sense. 
+  */
+  needleImage = cv.imread(needle, cv.IMREAD_UNCHANGED);
+  haystackImage = cv.imread(haystack, cv.IMREAD_UNCHANGED);
+
+  result = cv.matchTemplate(haystackImage, needleImage, cv.TM_CCOEFF_NORMED);
+
+  cv.imshow("Result", result);
+  cv.waitKey();
+}
+
+// window.onOpenCvReady = onOpenCvReady;
