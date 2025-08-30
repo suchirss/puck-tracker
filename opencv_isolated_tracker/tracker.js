@@ -3,9 +3,14 @@ function onOpenCvReady() {
     console.log("OpenCV.js is truly ready");
 
     const video = document.getElementById("inputVideo");
-    const src = "./assets/kadri-slow-mo-breakaway-goal.mp4";
+    const videoSrc = "./assets/kadri-slow-mo-breakaway-goal.mp4";
 
-    videoSetup(video, src);
+    const image = document.getElementById("templateMatchImage");
+    const imageSrc =
+      "./assets/kadri-slow-mo-breakaway-goal-image-early-frame.JPG";
+
+    videoSetup(video, videoSrc);
+    imageSetup(image, imageSrc);
     pausePlayMutedVideoOnLoop(video);
     matAndCanvasSetup(video);
   };
@@ -17,6 +22,14 @@ function videoSetup(video, src) {
     video.load();
   } else {
     console.error("Video element not found");
+  }
+}
+
+function imageSetup(image, src) {
+  if (image) {
+    image.src = src;
+  } else {
+    console.error("Image element not found");
   }
 }
 

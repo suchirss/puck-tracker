@@ -21,6 +21,7 @@
   width: 640px;
   height: 360px;
   box-sizing: border-box;
+  visibility: hidden;
 }
 
 #outputCanvas {
@@ -30,7 +31,8 @@
   width: 640px;
   height: 360px;
   pointer-events: none;
-  background-color: rgba(170, 188, 179, 0.68);
+  background-color: rgba(170, 188, 179, 0);
+  visibility: hidden;
 }
 
 #templateMatchImage {
@@ -40,5 +42,7 @@
   width: 640px;
   height: 360px;
   pointer-events: none;
-  background-color: rgba(170, 188, 179, 0.68);
+  border: 2px solid #000000;
+  /* background-color: rgb(170, 188, 179); */
+  /* visibility: hidden; */
 }
