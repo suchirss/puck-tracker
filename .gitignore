@@ -11,6 +11,4 @@ yarn-error.log*
 
 .vscode/
 
-.ml_training/
-
-public/opencv.js
+config.json

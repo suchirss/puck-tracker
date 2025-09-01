@@ -6,7 +6,7 @@ module.exports = {
   entry: {
     background: "./src/background.ts",
     contentScript: "./src/contentScript.ts",
-    popup: "./src/popup.ts",
+    popup: "./src/popup.tsx",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -20,14 +20,18 @@ module.exports = {
   },
   devtool: false,
   resolve: {
-    extensions: [".ts", ".js"],
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
   module: {
     rules: [
       {
-        test: /\.ts$/,
+        test: /\.(ts|tsx)$/,
         loader: "ts-loader",
         exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
@@ -37,6 +41,8 @@ module.exports = {
         { from: "public", to: "." },
         { from: "manifest.json", to: "." },
         { from: "src/styles.css", to: "styles.css" },
+        { from: "src/popup.css", to: "popup.css" },
+        { from: "src/assets", to: "assets" },
       ],
     }),
   ],

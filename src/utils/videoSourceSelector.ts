@@ -1,3 +1,10 @@
+// specify which types the video element can be for safety (HTMLVideoElement or null)
+let selectedVideo: HTMLVideoElement | null = null;
+
+export function getSelectedVideo(): HTMLVideoElement | null {
+  return selectedVideo;
+}
+
 export function chooseVideoSource(): Promise<HTMLVideoElement | null> {
   return new Promise((resolve) => {
     console.log("Choosing video source...");
@@ -53,9 +60,13 @@ export function chooseVideoSource(): Promise<HTMLVideoElement | null> {
           // Remove the overlay
           overlay.remove();
 
+          // reassign selectedVideo to the clicked video
+          selectedVideo = video;
+
           // Remove event listeners from all videos to clean up
           videoElements.forEach((v) => {
             v.replaceWith(v.cloneNode(true)); // Clone the video element to remove all listeners
+            // because deep clone does not copy event listeners
           });
         },
         { once: true } // Ensure the click listener is only triggered once
